@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReadEase – Student Readability Analyzer</title>
+  <meta name="description" content="ReadEase analyzes text readability for students, highlights the hardest sentences, explains them in plain English, and reads them aloud. Age-calibrated and free." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="brand">
+        <div class="brand-icon">📖</div>
+        <span class="brand-text">Read<span class="brand-accent">Ease</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#tool" class="nav-link">Analyzer</a>
+        <a href="#how" class="nav-link">How It Works</a>
+        <a href="#about" class="nav-link">About</a>
+      </div>
+      <button class="btn-nav" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">Try Free →</button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">✨ Built for Students &amp; Authors</div>
+      <h1 class="hero-title">
+        Is Your Text<br />
+        <span class="gradient-text">Too Hard to Read?</span>
+      </h1>
+      <p class="hero-desc">
+        Paste any chapter or article — ReadEase scores its readability,
+        highlights the hardest sentences, explains them in plain English,
+        and even <strong>reads them aloud</strong> for you.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('tool').scrollIntoView({behavior:'smooth'})">
+          Analyze My Text
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
+          See How It Works
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-section" id="how">
+    <div class="container">
+      <div class="section-tag">Simple Process</div>
+      <h2 class="section-title">How ReadEase Works</h2>
+      <p class="section-sub">Three steps. Instant results. No signup needed.</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-emoji">👤</div>
+          <h3>Tell Us About You</h3>
+          <p>Enter your age and study interests so we calibrate difficulty for <em>your</em> reading level.</p>
+        </div>
+        <div class="step-connector"><span>→</span></div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-emoji">📝</div>
+          <h3>Paste Your Text</h3>
+          <p>Drop in any chapter, article, essay or passage. We scan every sentence.</p>
+        </div>
+        <div class="step-connector"><span>→</span></div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-emoji">🎯</div>
+          <h3>Get Deep Insights</h3>
+          <p>6-formula score, hardest sentences highlighted, plain-English explanations &amp; audio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TOOL ===== -->
+  <section class="tool-section" id="tool">
+    <div class="container">
+      <div class="section-tag">The Analyzer</div>
+      <h2 class="section-title">Analyze Your Text</h2>
+      <p class="section-sub">Free, instant, calibrated to your reading level</p>
+
+      <div class="wizard" id="wizard">
+
+        <!-- ── STEP 1: Profile ── -->
+        <div class="step-panel active" id="step1-panel">
+          <div class="wizard-progress">
+            <div class="wp-bar" style="width:33%"></div>
+          </div>
+          <div class="wizard-body">
+            <div class="step-header">
+              <span class="step-badge">Step 1 of 3</span>
+              <h3>Tell us about yourself 👋</h3>
+              <p>This is a one-time setup. We'll remember your profile for future analyses.</p>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="user-age">Your Age</label>
+                <div class="field-wrap">
+                  <span class="field-icon">🎂</span>
+                  <input type="number" id="user-age" placeholder="e.g. 16" min="5" max="80" />
+                </div>
+                <span class="field-note">Between 5 and 80</span>
+              </div>
+              <div class="form-group">
+                <label for="user-grade">Study Level</label>
+                <div class="field-wrap select-wrap">
+                  <span class="field-icon">🏫</span>
+                  <select id="user-grade">
+                    <option value="">— Select level —</option>
+                    <option value="primary">Primary School (Grades 1–5)</option>
+                    <option value="middle">Middle School (Grades 6–8)</option>
+                    <option value="high">High School (Grades 9–12)</option>
+                    <option value="undergrad">Undergraduate / College</option>
+                    <option value="postgrad">Postgraduate / Professional</option>
+                    <option value="adult">Working Adult</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group hidden" id="interests-group">
+              <label>Study Interests <span class="label-note">(choose all that apply)</span></label>
+              <div class="chips" id="chips">
+                <button class="chip" data-val="science">🔬 Science</button>
+                <button class="chip" data-val="math">➗ Mathematics</button>
+                <button class="chip" data-val="literature">📚 Literature</button>
+                <button class="chip" data-val="history">🏛️ History</button>
+                <button class="chip" data-val="technology">💻 Technology</button>
+                <button class="chip" data-val="arts">🎨 Arts</button>
+                <button class="chip" data-val="sports">⚽ Sports</button>
+                <button class="chip" data-val="music">🎵 Music</button>
+                <button class="chip" data-val="business">💼 Business</button>
+                <button class="chip" data-val="medicine">🏥 Medicine</button>
+                <button class="chip" data-val="law">⚖️ Law</button>
+                <button class="chip" data-val="philosophy">🧠 Philosophy</button>
+              </div>
+            </div>
+
+            <div class="wizard-footer">
+              <div></div>
+              <button class="btn-primary" onclick="goToStep2()">
+                Continue
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 2: Paste Text ── -->
+        <div class="step-panel" id="step2-panel">
+          <div class="wizard-progress">
+            <div class="wp-bar" style="width:66%"></div>
+          </div>
+          <div class="wizard-body">
+            <div class="step-header">
+              <span class="step-badge">Step 2 of 3</span>
+              <h3>Paste your text 📄</h3>
+              <p id="step2-profile-line">Analyzing for a student. <button class="link-btn" onclick="goToStep1()">Change profile</button></p>
+            </div>
+
+            <div class="textarea-wrap">
+              <textarea id="main-text" placeholder="Paste your text here… (at least 1 sentence required)" spellcheck="false"></textarea>
+              <div class="textarea-footer">
+                <span id="wc-words">0 words</span>
+                <span class="tc-sep">·</span>
+                <span id="wc-sents">0 sentences</span>
+              </div>
+            </div>
+
+            <div class="wizard-footer">
+              <button class="btn-ghost" onclick="goToStep1()">← Back</button>
+              <button class="btn-primary" onclick="goToStep3()">
+                Analyze Text
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 3: Results ── -->
+        <div class="step-panel" id="step3-panel">
+          <div class="wizard-progress">
+            <div class="wp-bar" style="width:100%"></div>
+          </div>
+          <div class="wizard-body">
+
+            <div class="step-header">
+              <span class="step-badge">Results</span>
+              <h3>Analysis Complete 🎯</h3>
+              <p id="result-subtitle">Here's how your text reads for you.</p>
+            </div>
+
+            <!-- Difficulty Banner -->
+            <div class="diff-banner" id="diff-banner">
+              <span id="diff-icon"></span>
+              <div id="diff-text"></div>
+            </div>
+
+            <!-- Score Grid -->
+            <div class="score-grid">
+              <!-- Gauge -->
+              <div class="gauge-card">
+                <div class="gc-label">Flesch Reading Ease</div>
+                <div class="gauge-wrap">
+                  <svg viewBox="0 0 200 115" class="gauge-svg">
+                    <defs>
+                      <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%"   stop-color="#22c55e"/>
+                        <stop offset="50%"  stop-color="#f59e0b"/>
+                        <stop offset="100%" stop-color="#ef4444"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="#e2e8f0" stroke-width="14" stroke-linecap="round"/>
+                    <path id="g-fill" d="M18 100 A82 82 0 0 1 182 100" fill="none" stroke="url(#gGrad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="257.6" stroke-dashoffset="257.6" style="transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)"/>
+                    <text id="g-score" x="100" y="93" text-anchor="middle" font-size="30" font-weight="800" fill="#0f172a">—</text>
+                    <text id="g-sublabel" x="100" y="112" text-anchor="middle" font-size="10" fill="#64748b">—</text>
+                  </svg>
+                </div>
+                <div class="gc-scale">
+                  <span>0<br/><small>Hard</small></span>
+                  <span>100<br/><small>Easy</small></span>
+                </div>
+              </div>
+
+              <!-- Grade pill -->
+              <div class="grade-summary">
+                <div class="gs-item">
+                  <div class="gs-val" id="gs-grade">—</div>
+                  <div class="gs-key">Grade Level</div>
+                </div>
+                <div class="gs-sep"></div>
+                <div class="gs-item">
+                  <div class="gs-val" id="gs-age-match">—</div>
+                  <div class="gs-key">For Your Age</div>
+                </div>
+                <div class="gs-sep"></div>
+                <div class="gs-item">
+                  <div class="gs-val" id="gs-complex-pct">—</div>
+                  <div class="gs-key">Complex Words</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick stats row -->
+            <div class="quick-stats" id="quick-stats">
+              <div class="qs-item"><span class="qs-val" id="qs-words">—</span><span class="qs-key">Words</span></div>
+              <div class="qs-divider"></div>
+              <div class="qs-item"><span class="qs-val" id="qs-sents">—</span><span class="qs-key">Sentences</span></div>
+              <div class="qs-divider"></div>
+              <div class="qs-item"><span class="qs-val" id="qs-syl">—</span><span class="qs-key">Syllables</span></div>
+              <div class="qs-divider"></div>
+              <div class="qs-item"><span class="qs-val" id="qs-asl">—</span><span class="qs-key">Avg Sent. Length</span></div>
+              <div class="qs-divider"></div>
+              <div class="qs-item"><span class="qs-val" id="qs-asw">—</span><span class="qs-key">Avg Syllables/Word</span></div>
+              <div class="qs-divider"></div>
+              <div class="qs-item"><span class="qs-val" id="qs-complex">—</span><span class="qs-key">Complex Words</span></div>
+            </div>
+
+            <!-- Hardest Sentences -->
+            <div class="results-block">
+              <div class="rb-header">
+                <div>
+                  <h4 id="hard-title">🔍 Hardest Sentences</h4>
+                  <p class="rb-sub">Ranked by composite difficulty score for your age. Highlighted words have 3+ syllables.</p>
+                </div>
+                <span class="pill" id="hard-pill">—</span>
+              </div>
+              <div id="hard-list"></div>
+            </div>
+
+            <!-- Explain Prompt -->
+            <div class="explain-cta" id="explain-cta">
+              <div class="ecta-left">
+                <span class="ecta-icon">💡</span>
+                <div>
+                  <strong id="ecta-title">Want a breakdown of these sentences?</strong>
+                  <p id="ecta-sub">We'll explain each sentence in plain, simple language.</p>
+                </div>
+              </div>
+              <button class="btn-primary" id="explain-btn" onclick="toggleExplanations()">Yes, Show Me!</button>
+            </div>
+
+            <!-- Explanations -->
+            <div class="results-block hidden" id="expl-section">
+              <div class="rb-header">
+                <h4>💡 Plain-English Explanations</h4>
+              </div>
+              <div id="expl-list"></div>
+            </div>
+
+            <!-- History Row -->
+            <div class="restart-row">
+              <button class="btn-ghost" onclick="analyzeAnother()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+                Analyze Another Text
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /wizard -->
+
+      <!-- ── HISTORY ── -->
+      <div class="history-section hidden" id="history-section">
+        <div class="history-header">
+          <h4>📂 Previous Analyses</h4>
+          <button class="link-btn" onclick="clearHistory()">Clear all</button>
+        </div>
+        <div id="history-list"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about-section" id="about">
+    <div class="container about-grid">
+      <div class="about-text">
+        <div class="section-tag">Our Approach</div>
+        <h2 class="section-title" style="font-size:clamp(1.7rem,3.5vw,2.4rem)">Why ReadEase?</h2>
+        <p>A sentence that confuses a 7-year-old is perfectly normal for a college student. ReadEase understands that <strong>readability is personal</strong> — it accounts for your age and grade level before judging difficulty.</p>
+        <p>We run six industry-standard readability formulas simultaneously and calibrate the results against your profile for the most accurate picture possible.</p>
+        <ul class="feature-list">
+          <li><span class="chk">✓</span> 6 readability formulas run in parallel</li>
+          <li><span class="chk">✓</span> Age-calibrated difficulty scoring</li>
+          <li><span class="chk">✓</span> Hardest sentences extracted &amp; ranked</li>
+          <li><span class="chk">✓</span> Plain-English explanations on demand</li>
+          <li><span class="chk">✓</span> Text-to-speech for every sentence</li>
+          <li><span class="chk">✓</span> Analysis history saved locally</li>
+        </ul>
+      </div>
+      <div class="about-features">
+        <div class="about-feat-card">
+          <div class="afc-icon">🧮</div>
+          <div class="afc-body">
+            <div class="afc-title">6 Formulas, 1 Score</div>
+            <div class="afc-desc">We run Flesch, Flesch-Kincaid, Gunning Fog, SMOG, Coleman-Liau &amp; ARI simultaneously and combine them into one easy-to-read verdict.</div>
+          </div>
+        </div>
+        <div class="about-feat-card">
+          <div class="afc-icon">🎯</div>
+          <div class="afc-body">
+            <div class="afc-title">Calibrated to Your Age</div>
+            <div class="afc-desc">A Grade 8 text is easy for a college student but challenging for a 10-year-old. We adjust every result against your exact reading level.</div>
+          </div>
+        </div>
+        <div class="about-feat-card">
+          <div class="afc-icon">🔊</div>
+          <div class="afc-body">
+            <div class="afc-title">Listen &amp; Understand</div>
+            <div class="afc-desc">Every sentence can be read aloud at a pace suited to your age. Great for auditory learners, ESL students, or anyone who prefers to listen.</div>
+          </div>
+        </div>
+        <div class="about-feat-card">
+          <div class="afc-icon">💡</div>
+          <div class="afc-body">
+            <div class="afc-title">Plain-English Breakdowns</div>
+            <div class="afc-desc">Complex sentences get rewritten into simple language with clear explanations of what made them difficult in the first place.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">
+        <div class="brand-icon">📖</div>
+        <span class="brand-text">Read<span class="brand-accent">Ease</span></span>
+      </div>
+      <p class="foot-copy">Built for students. Powered by readability science. Free forever.</p>
+      <p class="foot-sub">© 2026 ReadEase — All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loading-overlay">
+    <div class="loader-spinner"></div>
+    <p class="loader-title">Analyzing your text…</p>
+    <p class="loader-sub">Running 6 readability formulas calibrated for your age</p>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
